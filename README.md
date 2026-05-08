@@ -4,5 +4,5 @@ multi-node EON setups.
 
 To use it run
 ```bash
-kubectl apply -k https://github.com/sajmon170/eon-k8s
+kubectl apply -k https://github.com/szymon-zadworny/eon-k8s
 ```
