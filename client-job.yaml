@@ -1,3 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: simple-wait
+data:
+  simple-wait-script: |
+    - !Wait
+      time: 100s
+
+---
+
 apiVersion: batch/v1
 kind: Job
 metadata:
