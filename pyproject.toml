@@ -1,0 +1,7 @@
+[project]
+name = "eon-k8s"
+version = "0.1.0"
+description = "A generator for Kubernetes-based EON testing"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = []
