@@ -4,6 +4,16 @@ from shutil import rmtree
 
 
 def main():
+    args = get_args()
+    try:
+        save_dir = create_save_dir('scenario')
+    except Exception as e:
+        print(e)
+        print("Aborting...")
+        return
+
+
+def get_args():
     parser = ArgumentParser(
         prog='eon-k8s-generate',
         description='A generator for Kubernetes-based EON simulation scenarios'
