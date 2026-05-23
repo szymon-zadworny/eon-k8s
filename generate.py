@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 from pathlib import Path
 from shutil import rmtree
+from jinja2 import Environment, PackageLoader, select_autoescape
 
 
 def main():
@@ -11,6 +12,29 @@ def main():
         print(e)
         print("Aborting...")
         return
+
+    
+def get_object_publish_scenario_yaml(step, nodes):
+    env = Environment(
+        loader=PackageLoader("generate"),
+        autoescape=select_autoescape()
+    )
+
+    bootstrap = env.get_template("bootstrap-service.yaml")
+    yield ("bootstrap-service.yaml", bootstrap.render())
+
+    node = env.get_template("node-job.yaml")
+    
+    # Nodes other than bootstrap, provider and consumer
+    for n in range(nodes - 3):
+        job = node.render(delay=f"{(n + 1) * step} ms")
+        yield (f"node-job-{n}", job)
+
+    provider = env.get_template("provider-job.yaml")
+    yield ("provider-job.yaml", provider.render(delay=f"{(nodes - 2) * step} ms"))
+        
+    consumer = env.get_template("consumer-job.yaml")
+    yield ("consumer-job.yaml", consumer.render(delay=f"{(nodes - 1) * step} ms"))
 
 
 def get_args():
