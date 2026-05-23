@@ -61,9 +61,11 @@ def get_args():
     )
     parser.add_argument('-s', '--step',
                         help='Time (ms) each simulation step takes',
+                        type=int,
                         default=300)
     parser.add_argument('-n', '--nodes',
                         help='Number of simulated nodes',
+                        type=int,
                         default=20)
     return parser.parse_args()
 
