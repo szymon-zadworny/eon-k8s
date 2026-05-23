@@ -7,7 +7,7 @@ data:
     - !Wait
       time: 1m
     - !Get
-      id: "tfu/bZlxQcGmmf/CqI23mYdDunY90GVF8MVjXNnOVtc="
+      id: "GXeUYl3yZ2G2NKGlpej3JhCaYGlEooDRhx0T8NJG/G4="
     - !Wait
       time: 10m
 
@@ -16,7 +16,7 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: client-simple-job
+  name: consumer-job
 spec:
   template:
     spec:
