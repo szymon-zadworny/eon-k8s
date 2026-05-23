@@ -1,0 +1,44 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: consumer-config
+data:
+  get-script: |
+    - !Get
+      id: "tfu/bZlxQcGmmf/CqI23mYdDunY90GVF8MVjXNnOVtc="
+    - !Wait
+      time: 100s
+
+---
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: client-simple-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: eon-client
+        image: 10.1.1.18:5000/eon-client
+        command: [
+          "eon-client",
+          "--stdout",
+          "--log-level", "debug",
+          "--bootstrap-addr", "10.96.0.100",
+          "--script-path", "/mnt/scripts/script.yaml"
+          "--delay", "{{delay}}"
+        ]
+        volumeMounts:
+        - name: scripts
+          mountPath: "/mnt/scripts"
+          readOnly: true
+      volumes:
+      - name: scripts
+        configMap:
+          name: consumer-config
+          items:
+          - key: "get-script"
+            path: "script.yaml"
+      restartPolicy: Never
+  backoffLimit: 4
