@@ -24,21 +24,34 @@ def get_object_publish_scenario_yaml(step, nodes):
         autoescape=select_autoescape()
     )
 
+    generated_files = []
+
     bootstrap = env.get_template("bootstrap-service.yaml")
-    yield ("bootstrap-service.yaml", bootstrap.render())
+    filename = "bootstrap-service.yaml"
+    generated_files.append(filename)
+    yield (filename, bootstrap.render())
 
     node = env.get_template("node-job.yaml")
     
     # Nodes other than bootstrap, provider and consumer
     for n in range(nodes - 3):
         job = node.render(delay=f"{(n + 1) * step} ms")
-        yield (f"node-job-{n}.yaml", job)
+        filename = f"node-job-{n}.yaml"
+        generated_files.append(filename)
+        yield (filename, job)
 
     provider = env.get_template("provider-job.yaml")
-    yield ("provider-job.yaml", provider.render(delay=f"{(nodes - 2) * step} ms"))
+    filename = "provider-job.yaml"
+    generated_files.append(filename)
+    yield (filename, provider.render(delay=f"{(nodes - 2) * step} ms"))
         
     consumer = env.get_template("consumer-job.yaml")
-    yield ("consumer-job.yaml", consumer.render(delay=f"{(nodes - 1) * step} ms"))
+    filename = "consumer-job.yaml"
+    generated_files.append(filename)
+    yield (filename, consumer.render(delay=f"{(nodes - 1) * step} ms"))
+
+    kustomization = env.get_template("kustomization.yaml")
+    yield ("kustomization.yaml", kustomization.render(files=generated_files))
 
 
 def get_args():
