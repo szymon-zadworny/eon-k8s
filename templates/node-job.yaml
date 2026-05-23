@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: simple-wait
+  name: node-config-{{number}}
 data:
-  simple-wait-script: |
+  node-script: |
     - !Wait
       time: 100s
 
@@ -12,7 +12,7 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: client-simple-job
+  name: node-{{number}}-job
 spec:
   template:
     spec:
@@ -24,7 +24,7 @@ spec:
           "--stdout",
           "--log-level", "debug",
           "--bootstrap-addr", "10.96.0.100",
-          "--script-path", "/mnt/scripts/simple.yaml",
+          "--script-path", "/mnt/scripts/script.yaml",
           "--delay", "{{delay}}"
         ]
         volumeMounts:
@@ -34,9 +34,9 @@ spec:
       volumes:
       - name: scripts
         configMap:
-          name: simple-wait
+          name: node-config-{{number}}
           items:
-          - key: "simple-wait-script"
-            path: "simple.yaml"
+          - key: "node-script"
+            path: "script.yaml"
       restartPolicy: Never
   backoffLimit: 4
