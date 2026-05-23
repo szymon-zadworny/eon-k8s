@@ -34,7 +34,7 @@ def create_save_dir(name):
         try:
             save_dir.mkdir()
         except FileExistsError:
-            ans = input("scenario exists. Overwrite? [y/n]: ")
+            ans = input(f"{name} exists. Overwrite? [y/n]: ")
 
             if ans == 'n':
                 raise
