@@ -13,6 +13,10 @@ def main():
         print("Aborting...")
         return
 
+    for (filename, content) in get_object_publish_scenario_yaml(args.step, args.nodes):
+        path = save_dir / filename
+        path.write_text(content)
+
     
 def get_object_publish_scenario_yaml(step, nodes):
     env = Environment(
@@ -28,7 +32,7 @@ def get_object_publish_scenario_yaml(step, nodes):
     # Nodes other than bootstrap, provider and consumer
     for n in range(nodes - 3):
         job = node.render(delay=f"{(n + 1) * step} ms")
-        yield (f"node-job-{n}", job)
+        yield (f"node-job-{n}.yaml", job)
 
     provider = env.get_template("provider-job.yaml")
     yield ("provider-job.yaml", provider.render(delay=f"{(nodes - 2) * step} ms"))
