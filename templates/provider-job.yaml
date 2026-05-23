@@ -28,7 +28,7 @@ spec:
           "--log-level", "debug",
           "--bootstrap-addr", "10.96.0.100",
           "--secret-key-seed", "12",
-          "--script-path", "/mnt/scripts/script.yaml"
+          "--script-path", "/mnt/scripts/script.yaml",
           "--delay", "{{delay}}"
         ]
         volumeMounts:

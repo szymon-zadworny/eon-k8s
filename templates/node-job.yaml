@@ -24,7 +24,7 @@ spec:
           "--stdout",
           "--log-level", "debug",
           "--bootstrap-addr", "10.96.0.100",
-          "--script-path", "/mnt/scripts/simple.yaml"
+          "--script-path", "/mnt/scripts/simple.yaml",
           "--delay", "{{delay}}"
         ]
         volumeMounts:
