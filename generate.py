@@ -1,4 +1,6 @@
 from argparse import ArgumentParser
+from pathlib import Path
+from shutil import rmtree
 
 
 def main():
@@ -12,8 +14,31 @@ def main():
     parser.add_argument('-n', '--nodes',
                         help='Number of simulated nodes',
                         default=20)
-    args = parser.parse_args()
-    print(args)
+    return parser.parse_args()
+
+
+def create_save_dir(name):
+    save_dir = Path(name)
+
+    while True:
+        try:
+            save_dir.mkdir()
+        except FileExistsError:
+            ans = input("scenario exists. Overwrite? [y/n]: ")
+
+            if ans == 'n':
+                raise
+
+            if save_dir.is_dir():
+                rmtree(save_dir)
+            else:
+                save_dir.unlink()
+
+            continue
+        except Exception as e:
+            raise
+        else:
+            return save_dir
 
 
 if __name__ == "__main__":
