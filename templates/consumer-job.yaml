@@ -7,7 +7,7 @@ data:
     - !Get
       id: "tfu/bZlxQcGmmf/CqI23mYdDunY90GVF8MVjXNnOVtc="
     - !Wait
-      time: 100s
+      time: 10m
 
 ---
 

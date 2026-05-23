@@ -7,7 +7,7 @@ data:
     - !Publish
       path: /mnt/scripts/test.txt
     - !Wait
-      time: 100s
+      time: 10m
   test-file: Hello
 
 ---
