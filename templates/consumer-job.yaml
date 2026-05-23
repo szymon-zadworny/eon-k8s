@@ -4,6 +4,8 @@ metadata:
   name: consumer-config
 data:
   get-script: |
+    - !Wait
+      time: 1m
     - !Get
       id: "tfu/bZlxQcGmmf/CqI23mYdDunY90GVF8MVjXNnOVtc="
     - !Wait

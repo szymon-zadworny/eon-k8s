@@ -4,6 +4,8 @@ metadata:
   name: provider-config
 data:
   publish-script: |
+    - !Wait
+      time: 1m
     - !Publish
       path: /mnt/scripts/test.txt
     - !Wait
