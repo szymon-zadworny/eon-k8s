@@ -1,8 +1,12 @@
 # Kubernetes-based EON testing
-This is a repostitory containing Kubernetes manifest files for testing
-multi-node EON setups.
+This repository contains a generator for Kubernetes-based simulation scenarios.
 
-To use it run
-```bash
-kubectl apply -k https://github.com/szymon-zadworny/eon-k8s
+To use it first generate a scenario:
+```
+$ uv run generate.py <time_step> <node_count>
+```
+
+Then apply it:
+```
+# kubectl apply -k scenario
 ```
