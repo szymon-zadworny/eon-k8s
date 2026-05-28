@@ -5,7 +5,7 @@ metadata:
 data:
   node-script: |
     - !Wait
-      time: 10m
+      time: 30m
 
 ---
 

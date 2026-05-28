@@ -5,11 +5,11 @@ metadata:
 data:
   get-script: |
     - !Wait
-      time: 2m
+      time: 4m
     - !Get
       id: "GXeUYl3yZ2G2NKGlpej3JhCaYGlEooDRhx0T8NJG/G4="
     - !Wait
-      time: 10m
+      time: 30m
 
 ---
 

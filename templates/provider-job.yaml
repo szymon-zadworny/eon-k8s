@@ -5,11 +5,11 @@ metadata:
 data:
   publish-script: |
     - !Wait
-      time: 1m
+      time: 4m
     - !Publish
       path: /mnt/scripts/test.txt
     - !Wait
-      time: 10m
+      time: 30m
   test-file: Hello
 
 ---

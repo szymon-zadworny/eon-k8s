@@ -40,7 +40,7 @@ spec:
           "--log-level", "debug",
           "--bootstrap-mode",
           "--secret-key-seed", "1",
-          "--script", "[!Wait {time: 10m}]"
+          "--script", "[!Wait {time: 30m}]"
         ]
         ports:
         - containerPort: 22137
