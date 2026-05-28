@@ -32,11 +32,12 @@ def get_object_publish_scenario_yaml(step, nodes):
     yield (filename, bootstrap.render())
 
     node = env.get_template("node-job.yaml")
-    
+
     # Nodes other than bootstrap, provider and consumer
+    digit_count = len(str(nodes - 3))
     for n in range(nodes - 3):
         job = node.render(number=n, delay=f"{(n + 1) * step} ms")
-        filename = f"node-job-{n}.yaml"
+        filename = f"node-job-{n:0{digit_count}d}.yaml"
         generated_files.append(filename)
         yield (filename, job)
 
