@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: 1-provider-config
+  name: a-provider-config
 data:
   publish-script: |
     - !Wait
@@ -17,7 +17,7 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: 1-provider-job
+  name: a-provider-job
 spec:
   template:
     spec:
@@ -40,7 +40,7 @@ spec:
       volumes:
       - name: scripts
         configMap:
-          name: 1-provider-config
+          name: a-provider-config
           items:
           - key: "publish-script"
             path: "script.yaml"

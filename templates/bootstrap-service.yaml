@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: 0-bootstrap-service
+  name: a-bootstrap-service
   labels:
-    app: 0-bootstrap-service
+    app: a-bootstrap-service
 spec:
   type: ClusterIP
   clusterIP: 10.96.0.100
@@ -11,25 +11,25 @@ spec:
   - port: 22137
     protocol: TCP
   selector:
-    app: 0-bootstrap-deployment
+    app: a-bootstrap-deployment
 
 ---
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 0-bootstrap-deployment
+  name: a-bootstrap-deployment
   labels:
-      app: 0-bootstrap-node
+      app: a-bootstrap-node
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: 0-bootstrap-deployment
+      app: a-bootstrap-deployment
   template:
     metadata:
       labels:
-        app: 0-bootstrap-deployment
+        app: a-bootstrap-deployment
     spec:
       containers:
       - name: eon-client

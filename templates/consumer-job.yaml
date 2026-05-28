@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: 2-consumer-config
+  name: a-consumer-config
 data:
   get-script: |
     - !Wait
@@ -16,7 +16,7 @@ data:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: 2-consumer-job
+  name: a-consumer-job
 spec:
   template:
     spec:
@@ -38,7 +38,7 @@ spec:
       volumes:
       - name: scripts
         configMap:
-          name: 2-consumer-config
+          name: a-consumer-config
           items:
           - key: "get-script"
             path: "script.yaml"

@@ -27,7 +27,7 @@ def get_object_publish_scenario_yaml(step, nodes):
     generated_files = []
 
     bootstrap = env.get_template("bootstrap-service.yaml")
-    filename = "0-bootstrap-service.yaml"
+    filename = "a-bootstrap-service.yaml"
     generated_files.append(filename)
     yield (filename, bootstrap.render())
 
@@ -43,12 +43,12 @@ def get_object_publish_scenario_yaml(step, nodes):
         yield (filename, job)
 
     provider = env.get_template("provider-job.yaml")
-    filename = "1-provider-job.yaml"
+    filename = "a-provider-job.yaml"
     generated_files.append(filename)
     yield (filename, provider.render(delay=f"{(nodes - 2) * step} ms"))
         
     consumer = env.get_template("consumer-job.yaml")
-    filename = "2-consumer-job.yaml"
+    filename = "a-consumer-job.yaml"
     generated_files.append(filename)
     yield (filename, consumer.render(delay=f"{(nodes - 1) * step} ms"))
 
