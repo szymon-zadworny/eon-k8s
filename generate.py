@@ -36,8 +36,9 @@ def get_object_publish_scenario_yaml(step, nodes):
     # Nodes other than bootstrap, provider and consumer
     digit_count = len(str(nodes - 3))
     for n in range(nodes - 3):
-        job = node.render(number=n, delay=f"{(n + 1) * step} ms")
-        filename = f"node-job-{n:0{digit_count}d}.yaml"
+        num = f"{n:0{digit_count}d}"
+        job = node.render(number=num, delay=f"{(n + 1) * step} ms")
+        filename = f"node-job-{num}.yaml"
         generated_files.append(filename)
         yield (filename, job)
 
